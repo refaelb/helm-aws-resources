@@ -22,7 +22,7 @@ securityGroupLambda:
       cidrIP: "0.0.0.0/0"
 
 rds:
-  dbInstanceIdentifier: "my-rds-instance"
+  dbInstanceIdentifier: "demo-rds-instance"
   dbInstanceClass: "db.t3.micro"
   engine: "mysql"
   engineVersion: "14"
@@ -30,7 +30,8 @@ rds:
   password: "yourpassword"
   allocatedStorage: 20
   backupRetentionPeriod: 7
-  subnetGroupName: "subnet-group-2"
+  subnetGroupName: "subnet-group2"
+  id: sg-0e7b261c28e9fe78e
 
 lambda:
   functionName: "my-lambda-function"

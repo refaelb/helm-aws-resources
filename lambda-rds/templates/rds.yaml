@@ -45,5 +45,5 @@ spec:
   backupRetentionPeriod: {{ .Values.rds.backupRetentionPeriod }}
   publiclyAccessible: false
   vpcSecurityGroupIDs:
-    - {{ .Values.securityGroupRDS.id }}
+    - {{ .Values.rds.id }}
   dbSubnetGroupName: {{ .Values.rds.subnetGroupName | quote }}
