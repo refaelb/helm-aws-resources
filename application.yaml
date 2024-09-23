@@ -7,7 +7,7 @@ spec:
   generators:
     - git:
         repoURL: https://github.com/refaelb/helm-aws-resource.git
-        revision: HEAD  # Changed from targetRevision to revision
+        revision: main  # Changed from targetRevision to revision
         files:
           - path: environment/*.yaml
   template:
