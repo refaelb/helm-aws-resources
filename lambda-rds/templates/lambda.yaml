@@ -1,0 +1,44 @@
+
+
+apiVersion: ec2.services.k8s.aws/v1alpha1
+kind: SecurityGroup
+metadata:
+  name: {{ .Values.securityGroupLambda.name }}
+  namespace: default
+spec:
+  description: {{ .Values.securityGroupLambda.description | quote }}
+  vpcID: {{ .Values.vpcID | quote }}
+  ingressRules:
+    []
+  egressRules:
+    - fromPort: 0
+      toPort: 0
+      ipProtocol: -1
+      ipRanges:
+        - cidrIP: "0.0.0.0/0"
+          description: "Allow all outbound traffic"
+
+---
+
+apiVersion: lambda.services.k8s.aws/v1alpha1
+kind: Function
+metadata:
+  name: {{ .Values.lambda.functionName }}
+  namespace: default
+spec:
+  functionName: {{ .Values.lambda.functionName | quote }}
+  role: {{ .Values.lambda.role | quote }}
+  code:
+    s3Bucket: {{ .Values.lambda.s3Bucket | quote }}
+    s3Key: {{ .Values.lambda.s3Key | quote }}
+  handler: {{ .Values.lambda.handler | quote }}
+  runtime: {{ .Values.lambda.runtime | quote }}
+  memorySize: {{ .Values.lambda.memorySize }}
+  timeout: {{ .Values.lambda.timeout }}
+  vpcConfig:
+    securityGroupIDs:
+      - {{ .Values.securityGroupLambda.name }}
+    subnetIDs:
+      {{- range .Values.lambda.subnetIDs }}
+      - {{ . | quote }}
+      {{- end }}
