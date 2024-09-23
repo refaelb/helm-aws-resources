@@ -30,7 +30,7 @@ rds:
   password: "yourpassword"
   allocatedStorage: 20
   backupRetentionPeriod: 7
-  subnetGroupName: "my-subnet-group"
+  subnetGroupName: "subnet-group-2"
 
 lambda:
   functionName: "my-lambda-function"
