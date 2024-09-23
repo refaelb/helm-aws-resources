@@ -39,11 +39,11 @@ spec:
   masterUsername: {{ .Values.rds.username | quote }}
   masterUserPassword:
     namespace: default
-    name: rds-secret
+    name: rds
     key: password
   allocatedStorage: {{ .Values.rds.allocatedStorage }}
   backupRetentionPeriod: {{ .Values.rds.backupRetentionPeriod }}
   publiclyAccessible: false
   vpcSecurityGroupIDs:
-    - {{ .Values.securityGroupRDS.name }}
+    - {{ .Values.securityGroupRDS.id }}
   dbSubnetGroupName: {{ .Values.rds.subnetGroupName | quote }}
