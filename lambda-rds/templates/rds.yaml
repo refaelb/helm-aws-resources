@@ -36,7 +36,6 @@ spec:
   dbInstanceIdentifier: {{ .Values.rds.dbInstanceIdentifier | quote }}
   dbInstanceClass: {{ .Values.rds.dbInstanceClass | quote }}
   engine: {{ .Values.rds.engine | quote }}
-  engineVersion: {{ .Values.rds.engineVersion | quote }}   # If you want to specify a specific engine version
   masterUsername: {{ .Values.rds.username | quote }}
   masterUserPassword:
     namespace: default
@@ -45,13 +44,6 @@ spec:
   allocatedStorage: {{ .Values.rds.allocatedStorage }}
   backupRetentionPeriod: {{ .Values.rds.backupRetentionPeriod }}
   publiclyAccessible: false
-  multiAZ: true  # Example setting if you want high availability (optional)
-  dbSubnetGroupName: {{ .Values.rds.subnetGroupName | quote }}
   vpcSecurityGroupIDs:
-    - {{ .Values.securityGroupRDS.id | quote }}  # Ensure you are using the Security Group ID here
-  storageType: "gp2"  # Example storage type (e.g., gp2 for general-purpose SSD)
-  tags:   # Example tag settings
-    - key: "environment"
-      value: "production"
-    - key: "team"
-      value: "devops"
+    - {{ .Values.securityGroupRDS.name }}
+  dbSubnetGroupName: {{ .Values.rds.subnetGroupName | quote }}
