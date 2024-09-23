@@ -2,12 +2,12 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: dynamic-appset
-  namespace: argocd
+  namespace: argo-cd
 spec:
   generators:
     - git:
         repoURL: https://github.com/refaelb/helm-aws-resource.git
-        targetRevision: HEAD
+        revision: HEAD  # Changed from targetRevision to revision
         files:
           - path: environment/*.yaml
   template:

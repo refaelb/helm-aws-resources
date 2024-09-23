@@ -1,0 +1,43 @@
+vpcID: "vpc-xxxxxxxx"
+
+securityGroupRDS:
+  name: "rds-sg"
+  description: "Security group for RDS"
+  ingressRules:
+    - fromPort: 3306
+      toPort: 3306
+      ipProtocol: tcp
+      groupID: "sg-lambda"
+      description: "Allow traffic from Lambda"
+
+securityGroupLambda:
+  name: "lambda-sg"
+  description: "Security group for Lambda"
+  ingressRules: []
+  egressRules:
+    - fromPort: 0
+      toPort: 0
+      ipProtocol: -1
+      cidrIP: "0.0.0.0/0"
+
+rds:
+  dbInstanceIdentifier: "my-rds-instance"
+  dbInstanceClass: "db.t3.micro"
+  engine: "mysql"
+  username: "admin"
+  password: "yourpassword"
+  allocatedStorage: 20
+  backupRetentionPeriod: 7
+  subnetGroupName: "my-subnet-group"
+
+lambda:
+  functionName: "my-lambda-function"
+  role: "arn:aws:iam::123456789012:role/LambdaExecutionRole"
+  s3Bucket: "my-bucket"
+  s3Key: "lambda-code.zip"
+  handler: "index.handler"
+  runtime: "nodejs14.x"
+  memorySize: 128
+  timeout: 10
+  subnetIDs:
+    - "subnet-xxxxxxxx"
