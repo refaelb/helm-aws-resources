@@ -36,6 +36,7 @@ spec:
   dbInstanceIdentifier: {{ .Values.rds.dbInstanceIdentifier | quote }}
   dbInstanceClass: {{ .Values.rds.dbInstanceClass | quote }}
   engine: {{ .Values.rds.engine | quote }}
+  region: eu-west-1
   masterUsername: {{ .Values.rds.username | quote }}
   masterUserPassword:
     namespace: default
